@@ -46,7 +46,7 @@ app.get("/pastes/recent10pastes", async (req, res) => {
 
 app.post("/pastes", async (req, res) => {
   const pasteData = req.body;
-  const text = "insert into pastes_table (name, text, title, time) values ($1, $2, $3, $4)" ;
+  const text = "insert into pastes_table (name, text, title, time) values ($1, $2, $3, $4) returning *" ;
   const values = [pasteData.name, pasteData.text, pasteData.title, pasteData.time];
   const dbres = await client.query(text, values);
   res.json(dbres.rows);
