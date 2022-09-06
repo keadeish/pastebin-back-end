@@ -39,6 +39,11 @@ app.get("/pastes", async (req, res) => {
   res.json(dbres.rows);
 });
 
+app.get("/pastes/recent10pastes", async (req, res) => {
+  const dbres = await client.query('select pasteid, name, text, title, time :: timestamp :: time from pastes_table order by time asc limit 10');
+  res.json(dbres.rows);
+});
+
 app.post("/pastes", async (req, res) => {
   const pasteData = req.body;
   const text = "insert into pastes_table (name, text, title, time) values ($1, $2, $3, $4)" ;
