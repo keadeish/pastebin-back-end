@@ -40,7 +40,7 @@ app.get("/pastes", async (req, res) => {
 });
 
 app.get("/pastes/recent10pastes", async (req, res) => {
-  const dbres = await client.query('select pasteid, name, text, title, time from pastes_table order by time asc limit 10');
+  const dbres = await client.query('select pasteid, name, text, title, time from pastes_table order by time desc limit 10');
   res.json(dbres.rows);
 });
 
